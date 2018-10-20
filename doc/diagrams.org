@@ -1,0 +1,50 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:nil todo:t |:t
+#+TITLE: Design Document
+#+DATE: <2018-10-20 Sat>
+#+AUTHOR: Benson Chu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.1 (Org mode 9.1.14)
+* Architecture
+#+BEGIN_SRC plantuml :file ./png/arch.png
+@startuml
+rectangle SurveyCreatorAndViewer
+rectangle ResponseLogger
+rectangle Cluster
+rectangle Texter
+
+database Database
+SurveyCreatorAndViewer -[hidden]right-> ResponseLogger
+ResponseLogger -[hidden]right-> Cluster
+Cluster -[hidden]right-> Texter
+Database -[hidden]up-> ResponseLogger
+
+SurveyCreatorAndViewer --> Database : Create
+SurveyCreatorAndViewer <-- Database : View
+ResponseLogger --> Database : Update
+ResponseLogger --> Cluster : Notify Finished
+Database --> Cluster : Read
+Cluster --> Texter : Output
+SurveyCreatorAndViewer --> Cluster : Manual Override
+@enduml
+#+END_SRC
+
+#+ATTR_LATEX: :width 8cm
+#+RESULTS:
+[[file:./png/arch.png]]
+* Pseudocode for cluster
+  list of people who need rides
+  list of people who can drive
+  while people left who need rides
+    for each unfulfilled driver 
+      find k nearest people they can pick up
+      then remove them from unfulfilled list
+    for each person
+      if person is in multiple groups
+        add driver back to unfulfilled list
+    remove fulfilled drivers and people with rides
