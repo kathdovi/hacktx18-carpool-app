@@ -2,4 +2,13 @@
   Creator tries to close survey
   Not enough drivers
   User is notified
-* 
+* Driver fills out form
+  User goes to website
+  Says they are driver
+  Input the number of people he can fit
+  Submits forms
+* Rider fills out form
+  User goes to website
+  Says they are not driver
+  Indicates whether they need transportation there, and transportation back
+  Submits form
