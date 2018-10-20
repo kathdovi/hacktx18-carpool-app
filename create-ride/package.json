@@ -1,0 +1,18 @@
+{
+  "name": "create-ride",
+  "version": "1.0.0",
+  "description": "Microservice for creating a ride",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Joshua Johnson",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.4"
+  }
+}
