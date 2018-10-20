@@ -6,9 +6,6 @@ const Schema = mongoose.Schema
 
 const Ride = {
   id: String,
-  name: String,
-  arrivalTime: Date,
-  returnTime: Date,
   passengers: [User],
   availableSeats: Number,
   driver: User
