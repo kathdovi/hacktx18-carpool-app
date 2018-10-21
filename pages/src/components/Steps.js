@@ -274,57 +274,66 @@ export const RiderFinish = (props) => {
 export class CarInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        this._onChange = this._onChange.bind(this);
+        this.state = {
+            seats: '',
+        };
+        this.handleChange = this.handleChange.bind(this);
         this._validate = this._validate.bind(this);
     }
-    _onChange(e) {
 
-    }
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
 
     _validate(e) {
         // You can add validation logic here
-        this.props.next(states.CONFIRM)
+        this.props.next(states.DRIVER_START)
     }
 
     render() {
         return (
-            < Grid container style={styles.form} xs={12}>
+            <Card>
+            < Grid container style={styles.form}>
                 <Grid item style={styles.form} xs={12}>
                     <Typography variant="h5" component="h2">
                         How many seats do you have available?
                 </Typography>
                 </Grid>
-                <FormControl >
-                    <Grid item style={styles.form} xs={12}>
-                        <FormGroup>
-                            <InputLabel htmlFor="demo-controlled-open-select">Available Seats</InputLabel>
-                            <Select
-                                open={this.state.open}
-                                onClose={this.handleClose}
-                                onOpen={this.handleOpen}
-                                value={this.state.age}
-                                onChange={this.handleChange}
-                                inputProps={{
-                                    name: 'available-seats',
-                                    id: 'demo-controlled-open-select',
-                                }}
-                            >
-                                <MenuItem value={1}>1</MenuItem>
-                                <MenuItem value={2}>2</MenuItem>
-                                <MenuItem value={3}>3</MenuItem>
-                                <MenuItem value={4}>4</MenuItem>
-                                <MenuItem value={5}>5</MenuItem>
-                                <MenuItem value={6}>6</MenuItem>
-                                <MenuItem value={7}>7</MenuItem>
-                                <MenuItem value={8}>8</MenuItem>
-                                <MenuItem value={9}>9</MenuItem>
-                                <MenuItem value={10}>10</MenuItem>
-                            </Select>
-                        </FormGroup>
-                    </Grid>
-                </FormControl>
+                    <FormControl>
+                        <InputLabel htmlFor="seats">Seats</InputLabel>
+                        <Select
+                            value={this.state.seats}
+                            onChange={this.handleChange}
+                            inputProps={{
+                                name: 'seats',
+                                id: 'seats',
+                            }}
+                            autoWidth
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                        </Select>
+                    </FormControl>
+                <Grid item xs={12}>
+
+                    <Button secondary onClick={this._back}>Back</Button>
+
+                    <Button primary onClick={this._validate}>Next</Button>
+
+                </Grid>
             </Grid>
+            </Card>
         );
     }
 }
