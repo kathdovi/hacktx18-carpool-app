@@ -26,7 +26,6 @@ class App extends Component {
     };
     this._next = this._next.bind(this);
     this._back = this._back.bind(this);
-    this._saveVehicle = this._saveVehicle.bind(this);
     this.stateMachine = new StateMachine();
   }
 
@@ -71,23 +70,13 @@ class App extends Component {
                   saveForm={this._saveFields}
                   back={this._back}
                   next={this._next} />);
-      case states.DRIVER_START:
-          return (<DriverStart
+      case states.DRIVER:
+          return (<Driver
                   saveForm={this._saveFields}
                   back={this._back}
                   next={this._next} />);
-      case states.DRIVER_FINISH:
-          return (<DriverFinish
-                  saveForm={this._saveFields}
-                  back={this._back}
-                  next={this._next} />);
-      case states.RIDER_START:
-          return (<RiderStart
-                  saveForm={this._saveFields}
-                  back={this._back}
-                  next={this._next} />);
-      case states.RIDER_FINISH:
-          return (<RiderFinish
+      case states.RIDER:
+          return (<Rider
                   saveForm={this._saveFields}
                   back={this._back}
                   next={this._next} />);
