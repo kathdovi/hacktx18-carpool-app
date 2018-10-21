@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Welcome, PersonChoose, CarInfo, DriverStart, DriverFinish, RiderStart, RiderFinish, Confirm } from './components/Steps.js';
+import { Welcome, PersonChoose, CarInfo, Driver, Rider, Confirm } from './components/Steps.js';
 import { states } from './components/States.js';
 import { StateMachine } from './components/StateMachine.js';
 
