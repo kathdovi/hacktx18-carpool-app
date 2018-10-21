@@ -2,3 +2,4 @@
 doc/png/
 **/*.tex
 **/node_modules/
+**/yarn.lock

@@ -95,12 +95,14 @@ export class PersonChoose extends Component {
         this._onChange = this._onChange.bind(this);
         this._validate = this._validate.bind(this);
         this._back = this._back.bind(this);
-
-
     }
 
     _onChange = event => {
         this.setState({ value: event.target.value });
+        console.log(event.target.value);
+        this.props.saveForm({
+            driver: event.target.value == 'driver'
+        });
     };
 
 
@@ -165,7 +167,7 @@ class BaseForm extends Component {
             type: this.props.type,
             address: null,
             errors: []
-        }
+        };
         this._onChange = this._onChange.bind(this);
         this._validate = this._validate.bind(this);
         this._back = this._back.bind(this);
