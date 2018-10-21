@@ -30,12 +30,8 @@ class App extends Component {
     this.stateMachine = new StateMachine();
   }
 
-  _saveVehicle(vehicle) {
-    let vehicles = this.state.vehicles.concat();
-    vehicles.push(vehicle);
-    this.setState({
-      vehicles: vehicles
-    });
+  _saveFields(obj) {
+    this.setState(obj);
   }
 
   _next(desiredState) {
@@ -63,35 +59,45 @@ class App extends Component {
    * state.
    */
   _currentStep() {
-    switch (this.state.currentState) {
+      switch (this.state.currentState) {
       case states.WELCOME:
-        return (<Welcome next={this._next} />);
+          return (<Welcome next={this._next} />);
       case states.PERSON_CHOOSE:
-        return (<PersonChoose
-          back={this._back}
-          next={this._next} />);
+          return (<PersonChoose
+                  back={this._back}
+                  next={this._next} />);
       case states.CAR_DETAIL:
-        return (<CarInfo
-          saveForm={this._saveVehicle}
-          back={this._back}
-          next={this._next} />)
-      case states.DRIVER:
-        return (<Driver
-          saveForm={this._saveVehicle}
-          back={this._back}
-          next={this._next} />);
-      case states.RIDER:
-        return (<Rider
-          saveForm={this._saveVehicle}
-          back={this._back}
-          next={this._next} />);
+          return (<CarInfo
+                  saveForm={this._saveFields}
+                  back={this._back}
+                  next={this._next} />);
+      case states.DRIVER_START:
+          return (<DriverStart
+                  saveForm={this._saveFields}
+                  back={this._back}
+                  next={this._next} />);
+      case states.DRIVER_FINISH:
+          return (<DriverFinish
+                  saveForm={this._saveFields}
+                  back={this._back}
+                  next={this._next} />);
+      case states.RIDER_START:
+          return (<RiderStart
+                  saveForm={this._saveFields}
+                  back={this._back}
+                  next={this._next} />);
+      case states.RIDER_FINISH:
+          return (<RiderFinish
+                  saveForm={this._saveFields}
+                  back={this._back}
+                  next={this._next} />);
       case states.CONFIRM:
-        return (<Confirm
-          back={this._back}
-          next={this._next} />);
+          return (<Confirm
+                  back={this._back}
+                  next={this._next} />);
       default:
-        return (<Welcome next={this._next} />);
-    }
+          return (<Welcome next={this._next} />);
+      }
   }
   render() {
     return (
