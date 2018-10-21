@@ -22,9 +22,13 @@ func printer(w http.ResponseWriter, r *http.Request) {
 func tripHandler(w http.ResponseWriter, r *http.Request) {
 	var t Trip
 	json.NewDecoder(r.Body).Decode(&t)
-	jsonValue, _ := json.Marshal(&t)
+
+	mCache := new(bytes.Buffer)
+	encCache := json.NewEncoder(mCache)
+	encCache.Encode(t)
+
 	http.Post("http://localhost:8080/printer",
-		"application/json", bytes.NewBuffer(jsonValue))
+		"application/json", mCache)
 }
 
 func main() {
