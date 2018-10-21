@@ -5,7 +5,6 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const Ride = {
-  id: String,
   passengers: [User],
   availableSeats: Number,
   driver: User

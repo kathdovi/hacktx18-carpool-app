@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const User = {
-  id: String
   name: String,
   phoneNumber: String,
   driver: Boolean,

@@ -4,7 +4,6 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const Trip = {
-  id: String,
   arrivalTime: Date,
   returnTime: Date,
   name: String,
