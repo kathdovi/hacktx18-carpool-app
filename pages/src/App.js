@@ -40,6 +40,7 @@ class App extends Component {
 
   _next(desiredState) {
     let currentState = this.state.currentState;
+    console.log(desiredState)
     let nextState = this.stateMachine.transitionTo(currentState, desiredState);
     this.setState({
       currentState: nextState
@@ -47,6 +48,7 @@ class App extends Component {
   }
 
   _back(desiredState) {
+    console.log(desiredState)
     let currentState = this.state.currentState;
     this.setState({
       currentState: this.stateMachine.transitionFrom(currentState, desiredState)
@@ -68,6 +70,11 @@ class App extends Component {
         return (<PersonChoose
           back={this._back}
           next={this._next} />);
+      case states.CAR_DETAIL:
+        return (<CarInfo
+          saveForm={this._saveVehicle}
+          back={this._back}
+          next={this._next} />)
       case states.DRIVER_START:
         return (<DriverStart
           saveForm={this._saveVehicle}

@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 .DS_Store
+=======
+doc/png/
+**/*.tex
+>>>>>>> 1198933771214de30a867d0b369b953abaa97dec

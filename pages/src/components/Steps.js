@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,7 +11,15 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { states } from './States.js';
-import Radio from './Radio.js';
+import Radio from '@material-ui/core/Radio';
+import RadioButtonsGroup from './Radio.js';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 
 const styles = {
@@ -85,25 +92,24 @@ export class PersonChoose extends Component {
             value: null,
             errors: []
         };
-        this._onChange = this._onChange.bind(this)
+        this._onChange = this._onChange.bind(this);
         this._validate = this._validate.bind(this);
         this._back = this._back.bind(this);
-        
+
 
     }
 
-    _onChange(e, { value }) {
-        this.setState({
-            value: value,
-            errors: []
-        });
-    }
+    _onChange = event => {
+        this.setState({ value: event.target.value });
+    };
+
 
     _validate(e) {
         e.preventDefault();
         let value = this.state.value;
+        console.log(value);
         if (value === 'driver') {
-            this.props.next(states.CAR_INFO);
+            this.props.next(states.CAR_DETAIL);
         } else if (value === 'rider') {
             this.props.next(states.RIDER_START);
         } else {
@@ -120,16 +126,35 @@ export class PersonChoose extends Component {
     render() {
         return (
             <div>
-                <Grid>
-                <Radio />
-                </Grid>
-                <Grid>
+                <Card>
 
-                    <Button secondary onClick={this._back}>Back</Button>
+                    <Grid container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justify="center">
+                        <FormControl component="fieldset" >
+                            <FormLabel component="legend">Are you a...</FormLabel>
+                            <RadioGroup
+                                aria-label="persontype"
+                                name="persontype"
+                                value={this.state.value}
+                                onChange={this._onChange}
+                            >
+                                <FormControlLabel value="driver" control={<Radio />} label="Driver" />
+                                <FormControlLabel value="rider" control={<Radio />} label="Rider" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
 
-                    <Button primary onClick={this._validate}>Next</Button>
+                    <Grid>
 
-                </Grid>
+                        <Button secondary onClick={this._back}>Back</Button>
+
+                        <Button primary onClick={this._validate}>Next</Button>
+
+                    </Grid>
+                </Card>
             </div>
         );
     }
@@ -190,12 +215,12 @@ class BaseForm extends Component {
                     />
                 </FormGroup>
                 <Grid>
-                    <Grid.Column floated='left' width={5}>
-                        <Button secondary onClick={this._back}>Back</Button>
-                    </Grid.Column>
-                    <Grid.Column floated='right' width={5}>
-                        <Button primary onClick={this._validate}>Next</Button>
-                    </Grid.Column>
+
+                    <Button secondary onClick={this._back}>Back</Button>
+
+
+                    <Button primary onClick={this._validate}>Next</Button>
+
                 </Grid>
             </FormControl>
         );
@@ -263,25 +288,43 @@ export class CarInfo extends Component {
     }
 
     render() {
-        let options = [
-            {
-                text: 'Yes',
-                value: 'Yes'
-            },
-            {
-                text: 'No',
-                value: 'No'
-            },
-            {
-                text: "Don't Know",
-                value: "Don't Know"
-            }
-        ];
-
         return (
-            <FormControl>
-                {/* Things */}
-            </FormControl>
+            < Grid container style={styles.form} xs={12}>
+                <Grid item style={styles.form} xs={12}>
+                    <Typography variant="h5" component="h2">
+                        How many seats do you have available?
+                </Typography>
+                </Grid>
+                <FormControl >
+                    <Grid item style={styles.form} xs={12}>
+                        <FormGroup>
+                            <InputLabel htmlFor="demo-controlled-open-select">Available Seats</InputLabel>
+                            <Select
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                onOpen={this.handleOpen}
+                                value={this.state.age}
+                                onChange={this.handleChange}
+                                inputProps={{
+                                    name: 'available-seats',
+                                    id: 'demo-controlled-open-select',
+                                }}
+                            >
+                                <MenuItem value={1}>1</MenuItem>
+                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={3}>3</MenuItem>
+                                <MenuItem value={4}>4</MenuItem>
+                                <MenuItem value={5}>5</MenuItem>
+                                <MenuItem value={6}>6</MenuItem>
+                                <MenuItem value={7}>7</MenuItem>
+                                <MenuItem value={8}>8</MenuItem>
+                                <MenuItem value={9}>9</MenuItem>
+                                <MenuItem value={10}>10</MenuItem>
+                            </Select>
+                        </FormGroup>
+                    </Grid>
+                </FormControl>
+            </Grid>
         );
     }
 }
