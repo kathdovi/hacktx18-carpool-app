@@ -42,7 +42,18 @@ const styles = {
     },
     wide: {
         width: 70,
-    }
+    },
+    tallspace: {
+        marginTop: 40,
+        marginBottom: 20,
+    },
+    bottomspace: {
+        marginBottom: 40,
+    }, 
+    buttonspace: {
+        marginTop: 20,
+        marginBottom: 20,
+    },
 };
 
 export const Welcome = (props) => {
@@ -50,7 +61,7 @@ export const Welcome = (props) => {
     return (
         <Card>
             <CardContent>
-                <Typography variant="h1" component="h1">
+                <Typography variant="h1" component="h1" style={styles.tallspace}>
                     Hi, what's your...
                 </Typography>
 
@@ -70,9 +81,9 @@ export const Welcome = (props) => {
                 <Grid item style={styles.form} xs={12}>
                     <FormGroup>
                         <TextField
-                            id="address"
-                            label="Address"
-                            placeholder="Address"
+                            id="email"
+                            label="Email"
+                            placeholder="Email"
                             multiline
                             margin="normal"
                         />
@@ -81,7 +92,7 @@ export const Welcome = (props) => {
             </Grid>
             <Grid container justify="center">
                 <CardActions>
-                    <Button primary onClick={() => props.next(states.PERSON_CHOOSE)} style={styles.button} size="large">Next</Button>
+                    <Button style={styles.buttonspace} primary onClick={() => props.next(states.PERSON_CHOOSE)} size="large">Next</Button>
                 </CardActions>
             </Grid>
         </Card>
@@ -138,12 +149,15 @@ export class PersonChoose extends Component {
                     alignItems="center"
                     justify="center">
                     <FormControl component="fieldset" >
-                        <FormLabel component="legend">Are you a...</FormLabel>
-                        <RadioGroup
+                        <Typography variant="h2" component="h2" style={styles.tallspace}>
+                            Are you a...
+                </Typography>
+                        <RadioGroup 
                             aria-label="persontype"
                             name="persontype"
                             value={this.state.value}
                             onChange={this._onChange}
+                            style={styles.tallspace}
                         >
                             <FormControlLabel value="driver" control={<Radio />} label="Driver" />
                             <FormControlLabel value="rider" control={<Radio />} label="Rider" />
@@ -153,9 +167,9 @@ export class PersonChoose extends Component {
 
                 <Grid>
 
-                    <Button secondary onClick={this._back}>Back</Button>
+                    <Button style={styles.buttonspace} secondary onClick={this._back}>Back</Button>
 
-                    <Button primary onClick={this._validate}>Next</Button>
+                    <Button style={styles.buttonspace} primary onClick={this._validate}>Next</Button>
 
                 </Grid>
             </Card>
@@ -220,8 +234,8 @@ class BaseForm extends Component {
                     </FormGroup>
                     <Grid>
 
-                        <Button secondary onClick={this._back}>Back</Button>
-                        <Button primary onClick={this._validate}>Next</Button>
+                        <Button style={styles.buttonstyle} secondary onClick={this._back}>Back</Button>
+                        <Button style={styles.buttonstyle} primary onClick={this._validate}>Next</Button>
 
                     </Grid>
                 </FormControl>
@@ -285,14 +299,15 @@ export class CarInfo extends Component {
             <Card>
                 < Grid container>
                     <Grid item xs={12}>
-                        <Typography variant="h5" component="h2">
+                        <Typography variant="h2" component="h2" style={styles.tallspace}>
                             How many seats do you have available?
                 </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                    <FormControl>
-                        <InputLabel style={styles.wide} htmlFor="seats">Seats</InputLabel>
+                        <FormControl style={styles.wide}>
+                        <InputLabel htmlFor="seats">Seats</InputLabel>
                         <Select
+        
                             value={this.state.seats}
                             onChange={this.handleChange}
                             inputProps={{
@@ -314,11 +329,13 @@ export class CarInfo extends Component {
                         </Select>
                     </FormControl>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12}
 
-                        <Button secondary onClick={this._back}>Back</Button>
+>
 
-                        <Button primary onClick={this._validate}>Next</Button>
+                        <Button style={styles.buttonspace} secondary onClick={this._back}>Back</Button>
+
+                        <Button style={styles.buttonspace} primary onClick={this._validate}>Next</Button>
 
                     </Grid>
                 </Grid>

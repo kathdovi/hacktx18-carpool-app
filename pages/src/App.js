@@ -24,6 +24,7 @@ class App extends Component {
           name: null,
           phone: null,
           driver: null,
+          capacity: null,
           address: null
     };
     this._next = this._next.bind(this);
