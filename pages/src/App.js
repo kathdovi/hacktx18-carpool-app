@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Welcome, PersonChoose, CarInfo, Driver, Rider, Confirm } from './components/Steps.js';
+import { Welcome, PersonChoose, CarInfo, DriverStart, DriverFinish, RiderStart, RiderFinish, Confirm } from './components/Steps.js';
 import { states } from './components/States.js';
 import { StateMachine } from './components/StateMachine.js';
 
@@ -9,7 +9,7 @@ const styles = {
     minWidth: 275,
   },
   title: {
-    fontSize: 50,
+    fontSize: 30,
   },
   pos: {
     marginBottom: 12,
@@ -19,10 +19,11 @@ const styles = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentState: states.WELCOME,
-      vehicleType: null,
-      vehicles: []
+      this.state = {
+          name: null,
+          phone: null,
+          driver: null,
+          address: null
     };
     this._next = this._next.bind(this);
     this._back = this._back.bind(this);
