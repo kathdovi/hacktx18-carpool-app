@@ -23,9 +23,6 @@ import Select from '@material-ui/core/Select';
 
 
 const styles = {
-    card: {
-        minWidth: 275,
-    },
     title: {
         fontSize: 14,
     },
@@ -39,6 +36,7 @@ const styles = {
     form: {
         marginRight: 30,
         marginLeft: 30,
+        color: '#97c2b9',
     },
     wide: {
         width: 70,
@@ -46,13 +44,22 @@ const styles = {
     tallspace: {
         marginTop: 40,
         marginBottom: 20,
+        color:  '#324450',
     },
     bottomspace: {
         marginBottom: 40,
-    }, 
+    },
     buttonspace: {
         marginTop: 20,
         marginBottom: 20,
+        marginRight: 10,
+        marginLeft: 10,
+        backgroundColor: '#324450',
+        color: 'white'
+    },
+    card: {
+        height: '100vh',
+        backgroundColor: '#97c2b9',
     },
 };
 
@@ -78,7 +85,6 @@ export class Welcome {
                 <Typography variant="h1" component="h1" style={styles.tallspace}>
                   Hi, what's your...
                 </Typography>
-
               </CardContent>
               <Grid container spacing={24}>
                 <Grid item style={styles.form} xs={12}>
@@ -93,15 +99,16 @@ export class Welcome {
                   </FormGroup>
                 </Grid>
                 <Grid item style={styles.form} xs={12}>
-                  <FormGroup>
-                    <TextField
-                      id="email"
-                      label="Email"
-                      placeholder="Email"
-                      multiline
-                      margin="normal"
+                    <FormGroup>
+                    <TextField 
+                        style={{color:'#97c2b9'}}
+                        id="email"
+                        label="Email"
+                        placeholder="Email"
+                        multiline
+                        margin="normal"
                     />
-                  </FormGroup>
+                    </FormGroup>
                 </Grid>
               </Grid>
               <Grid container justify="center">
@@ -156,7 +163,7 @@ export class PersonChoose extends Component {
 
     render() {
         return (
-            <Card>
+            <Card style={styles.card}>
 
                 <Grid container
                     spacing={0}
@@ -230,14 +237,16 @@ class BaseForm extends Component {
 
     render() {
         return (
-            <Card>
+            <Card style={styles.card}>
                 <FormControl>
                     {/* {this.state.errors.length > 0 &&
                     <Message negative>
                         <p>{this.state.errors.join('. ')}</p>
                     </Message>
                 } */}
-                    <h2>{this.props.type} details:</h2>
+                    <Typography variant="h2" component="h2" style={styles.tallspace}>
+                        {this.props.type} details:
+                </Typography>
                     <FormGroup widths='equal'>
                         <TextField
                             id="standard-textarea"
@@ -311,7 +320,7 @@ export class CarInfo extends Component {
 
     render() {
         return (
-            <Card>
+            <Card style={styles.card}>
                 < Grid container>
                     <Grid item xs={12}>
                         <Typography variant="h2" component="h2" style={styles.tallspace}>
@@ -322,7 +331,6 @@ export class CarInfo extends Component {
                         <FormControl style={styles.wide}>
                         <InputLabel htmlFor="seats">Seats</InputLabel>
                         <Select
-        
                             value={this.state.seats}
                             onChange={this.handleChange}
                             inputProps={{
@@ -367,8 +375,10 @@ export class Confirm extends React.Component {
          * alert
          */
         return (
-            <Card>
-                <h1> Woohoo! </h1>
+            <Card style={styles.card}>
+                <Typography variant="h1" component="h1" style={styles.tallspace}>
+                    Woohoo! Trip Saved!
+                </Typography>
             </Card>
         );
     }
