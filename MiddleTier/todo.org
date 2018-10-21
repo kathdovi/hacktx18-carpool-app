@@ -1,0 +1,20 @@
+* TODO Scaffold [2/4]
+** DONE Create Trip
+   CLOSED: [2018-10-20 Sat 22:31]
+   - State "DONE"       from "TODO"       [2018-10-20 Sat 22:31]
+** TODO Create Organizer
+** DONE Record Response
+   CLOSED: [2018-10-20 Sat 22:31]
+   - State "DONE"       from "TODO"       [2018-10-20 Sat 22:31]
+** TODO Can Close
+   - State "DONE"       from "TODO"       [2018-10-20 Sat 22:31]
+* TODO Database [0/4]
+** TODO Create Trip
+** TODO Create Organizer
+** TODO Record Response
+** TODO Can Close
+* TODO Frontend [0/4]
+** TODO Create Trip
+** TODO Create Organizer
+** TODO Record Response
+** TODO Can Close

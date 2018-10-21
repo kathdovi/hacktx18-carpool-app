@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export GOPATH=$(go env GOPATH):~/Github/my-projects/hacktx18/MiddleTier
+make clean
+make
+./build/a.out
