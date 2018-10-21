@@ -45,47 +45,63 @@ const styles = {
     }
 };
 
-export const Welcome = (props) => {
+export class Welcome extends Component {
+    
+    constructor(props) {
+        super(props);
+        this._onChange = this._onChange.bind(this);
+    }
+    
 
-    return (
-        <Card>
-            <CardContent>
+    _onChange = event => {
+        this.setState({ value: event.target.value });
+        console.log(event.target.value);
+        this.props.saveForm({
+            driver: event.target.value == 'driver'
+        });
+    };
+
+    render() {
+        return (
+            <Card>
+              <CardContent>
                 <Typography variant="h1" component="h1">
-                    Hi, what's your...
+                  Hi, what's your...
                 </Typography>
 
-            </CardContent>
-            <Grid container spacing={24}>
+              </CardContent>
+              <Grid onChange={this._onChange} container spacing={24}>
                 <Grid item style={styles.form} xs={12}>
-                    <FormGroup>
-                        <TextField
-                            id="name"
-                            label="Name"
-                            placeholder="Name"
-                            multiline
-                            margin="normal"
-                        />
-                    </FormGroup>
+                  <FormGroup>
+                    <TextField
+                      id="name"
+                      label="Name"
+                      placeholder="Name"
+                      multiline
+                      margin="normal"
+                    />
+                  </FormGroup>
                 </Grid>
                 <Grid item style={styles.form} xs={12}>
-                    <FormGroup>
-                        <TextField
-                            id="address"
-                            label="Address"
-                            placeholder="Address"
-                            multiline
-                            margin="normal"
-                        />
-                    </FormGroup>
+                  <FormGroup>
+                    <TextField
+                      id="address"
+                      label="Address"
+                      placeholder="Address"
+                      multiline
+                      margin="normal"
+                    />
+                  </FormGroup>
                 </Grid>
-            </Grid>
-            <Grid container justify="center">
+              </Grid>
+              <Grid container justify="center">
                 <CardActions>
-                    <Button primary onClick={() => props.next(states.PERSON_CHOOSE)} style={styles.button} size="large">Next</Button>
+                  <Button primary onClick={() => this.props.next(states.PERSON_CHOOSE)} style={styles.button} size="large">Next</Button>
                 </CardActions>
-            </Grid>
-        </Card>
-    );
+              </Grid>
+            </Card>
+        );
+    }
 }
 
 export class PersonChoose extends Component {
