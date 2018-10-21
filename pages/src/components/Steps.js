@@ -125,37 +125,35 @@ export class PersonChoose extends Component {
 
     render() {
         return (
-            <div>
-                <Card>
+            <Card>
 
-                    <Grid container
-                        spacing={0}
-                        direction="column"
-                        alignItems="center"
-                        justify="center">
-                        <FormControl component="fieldset" >
-                            <FormLabel component="legend">Are you a...</FormLabel>
-                            <RadioGroup
-                                aria-label="persontype"
-                                name="persontype"
-                                value={this.state.value}
-                                onChange={this._onChange}
-                            >
-                                <FormControlLabel value="driver" control={<Radio />} label="Driver" />
-                                <FormControlLabel value="rider" control={<Radio />} label="Rider" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
+                <Grid container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center">
+                    <FormControl component="fieldset" >
+                        <FormLabel component="legend">Are you a...</FormLabel>
+                        <RadioGroup
+                            aria-label="persontype"
+                            name="persontype"
+                            value={this.state.value}
+                            onChange={this._onChange}
+                        >
+                            <FormControlLabel value="driver" control={<Radio />} label="Driver" />
+                            <FormControlLabel value="rider" control={<Radio />} label="Rider" />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
 
-                    <Grid>
+                <Grid>
 
-                        <Button secondary onClick={this._back}>Back</Button>
+                    <Button secondary onClick={this._back}>Back</Button>
 
-                        <Button primary onClick={this._validate}>Next</Button>
+                    <Button primary onClick={this._validate}>Next</Button>
 
-                    </Grid>
-                </Card>
-            </div>
+                </Grid>
+            </Card>
         );
     }
 }
@@ -171,11 +169,6 @@ class BaseForm extends Component {
         this._onChange = this._onChange.bind(this);
         this._validate = this._validate.bind(this);
         this._back = this._back.bind(this);
-    }
-
-    _back(e) {
-        e.preventDefault();
-        this.props.back(states.VEHICLE_CHOOSE);
     }
 
     _onChange(e, { name, value }) {
@@ -196,33 +189,40 @@ class BaseForm extends Component {
         this.props.next(this.props.nextState);
     }
 
+    _back(e) {
+        e.preventDefault();
+        this.props.back(this.props.lastState);
+    }
+
     render() {
         return (
-            <FormControl>
-                {/* {this.state.errors.length > 0 &&
+            <Card>
+                <FormControl>
+                    {/* {this.state.errors.length > 0 &&
                     <Message negative>
                         <p>{this.state.errors.join('. ')}</p>
                     </Message>
                 } */}
-                <h2>{this.props.type} details:</h2>
-                <FormGroup widths='equal'>
-                    <TextField
-                        id="standard-textarea"
-                        label="With placeholder multiline"
-                        placeholder="Placeholder"
-                        multiline
-                        margin="normal"
-                    />
-                </FormGroup>
-                <Grid>
+                    <h2>{this.props.type} details:</h2>
+                    <FormGroup widths='equal'>
+                        <TextField
+                            id="standard-textarea"
+                            label="With placeholder multiline"
+                            placeholder="Placeholder"
+                            multiline
+                            margin="normal"
+                        />
+                    </FormGroup>
+                    <Grid>
 
-                    <Button secondary onClick={this._back}>Back</Button>
+                        <Button secondary onClick={this._back}>Back</Button>
 
 
-                    <Button primary onClick={this._validate}>Next</Button>
+                        <Button primary onClick={this._validate}>Next</Button>
 
-                </Grid>
-            </FormControl>
+                    </Grid>
+                </FormControl>
+            </Card>
         );
     }
 }
@@ -234,8 +234,10 @@ export const DriverStart = (props) => {
             next={props.next}
             back={props.back}
             saveForm={props.saveForm}
-            nextState={states.DRIVER_FINISH} />
+            nextState={states.DRIVER_FINISH}
+            lastState={states.CAR_DETAIL} />
     );
+
 }
 
 export const DriverFinish = (props) => {
@@ -245,7 +247,8 @@ export const DriverFinish = (props) => {
             next={props.next}
             back={props.back}
             saveForm={props.saveForm}
-            nextState={states.CONFIRM} />
+            nextState={states.CONFIRM}
+            lastState={states.DRIVER_START} />
     );
 }
 
@@ -256,7 +259,8 @@ export const RiderStart = (props) => {
             next={props.next}
             back={props.back}
             saveForm={props.saveForm}
-            nextState={states.RIDER_FINISH} />
+            nextState={states.RIDER_FINISH}
+            lastState={states.PERSON_CHOOSE} />
     );
 }
 
@@ -267,7 +271,8 @@ export const RiderFinish = (props) => {
             next={props.next}
             back={props.back}
             saveForm={props.saveForm}
-            nextState={states.CONFIRM} />
+            nextState={states.CONFIRM}
+            lastState={states.RIDER_START} />
     );
 }
 
@@ -279,26 +284,32 @@ export class CarInfo extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this._validate = this._validate.bind(this);
+        this._back = this._back.bind(this);
     }
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
 
+    _back() {
+        this.props.back(states.PERSON_CHOOSE);
+    }
+
     _validate(e) {
         // You can add validation logic here
-        this.props.next(states.DRIVER_START)
+        this.props.next(states.DRIVER_START);
+        console.log(this);
     }
 
     render() {
         return (
             <Card>
-            < Grid container style={styles.form}>
-                <Grid item style={styles.form} xs={12}>
-                    <Typography variant="h5" component="h2">
-                        How many seats do you have available?
+                < Grid container style={styles.form}>
+                    <Grid item style={styles.form} xs={12}>
+                        <Typography variant="h5" component="h2">
+                            How many seats do you have available?
                 </Typography>
-                </Grid>
+                    </Grid>
                     <FormControl>
                         <InputLabel htmlFor="seats">Seats</InputLabel>
                         <Select
@@ -310,9 +321,6 @@ export class CarInfo extends Component {
                             }}
                             autoWidth
                         >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
                             <MenuItem value={3}>3</MenuItem>
@@ -325,14 +333,14 @@ export class CarInfo extends Component {
                             <MenuItem value={10}>10</MenuItem>
                         </Select>
                     </FormControl>
-                <Grid item xs={12}>
+                    <Grid item xs={12}>
 
-                    <Button secondary onClick={this._back}>Back</Button>
+                        <Button secondary onClick={this._back}>Back</Button>
 
-                    <Button primary onClick={this._validate}>Next</Button>
+                        <Button primary onClick={this._validate}>Next</Button>
 
+                    </Grid>
                 </Grid>
-            </Grid>
             </Card>
         );
     }
@@ -346,7 +354,9 @@ export class Confirm extends React.Component {
          * alert
          */
         return (
-            <h1> Woohoo! </h1>
+            <Card>
+                <h1> Woohoo! </h1>
+            </Card>
         );
     }
 }
