@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"handlers"
 	"net/http"
 )
 
@@ -27,7 +28,9 @@ func tripHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	//http.HandleFunc("/api/org", orgHandler)
 	http.HandleFunc("/api/trip", tripHandler)
 	http.HandleFunc("/printer", printer)
+	http.HandleFunc("/", handlers.Index)
 	http.ListenAndServe(":8080", nil)
 }
