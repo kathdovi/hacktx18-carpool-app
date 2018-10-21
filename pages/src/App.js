@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Welcome, PersonChoose, CarInfo, DriverStart, DriverFinish, RiderStart, RiderFinish, Confirm } from './components/Steps.js';
+import { Welcome, PersonChoose, CarInfo, Driver, Rider, Confirm } from './components/Steps.js';
 import { states } from './components/States.js';
 import { StateMachine } from './components/StateMachine.js';
 
@@ -9,7 +9,7 @@ const styles = {
     minWidth: 275,
   },
   title: {
-    fontSize: 30,
+    fontSize: 50,
   },
   pos: {
     marginBottom: 12,
@@ -75,23 +75,13 @@ class App extends Component {
           saveForm={this._saveVehicle}
           back={this._back}
           next={this._next} />)
-      case states.DRIVER_START:
-        return (<DriverStart
+      case states.DRIVER:
+        return (<Driver
           saveForm={this._saveVehicle}
           back={this._back}
           next={this._next} />);
-      case states.DRIVER_FINISH:
-        return (<DriverFinish
-          saveForm={this._saveVehicle}
-          back={this._back}
-          next={this._next} />);
-      case states.RIDER_START:
-        return (<RiderStart
-          saveForm={this._saveVehicle}
-          back={this._back}
-          next={this._next} />);
-      case states.RIDER_FINISH:
-        return (<RiderFinish
+      case states.RIDER:
+        return (<Rider
           saveForm={this._saveVehicle}
           back={this._back}
           next={this._next} />);

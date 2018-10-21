@@ -11,13 +11,11 @@ export class StateMachine {
     constructor() {
         this.transitions = {
             [states.WELCOME]: [states.PERSON_CHOOSE],
-            [states.PERSON_CHOOSE]: [states.CAR_DETAIL, states.RIDER_START],
-            [states.CAR_DETAIL]: [states.DRIVER_START],
-            [states.DRIVER_START]: [states.DRIVER_FINISH],
-            [states.DRIVER_FINISH]: [states.CONFIRM],
-            [states.RIDER_START]: [states.RIDER_FINISH],
-            [states.RIDER_FINISH]: [states.CONFIRM],
-            [states.CONFIRM]: [states.FINISH]
+            [states.PERSON_CHOOSE]: [states.CAR_DETAIL, states.RIDER],
+            [states.CAR_DETAIL]: [states.DRIVER],
+            [states.DRIVER]: [states.CONFIRM],
+            [states.RIDER]: [states.CONFIRM],
+            [states.CONFIRM]: [states.FINISH] 
         };
     }
 

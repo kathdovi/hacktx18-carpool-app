@@ -47,8 +47,8 @@ export const Welcome = (props) => {
     return (
         <Card>
             <CardContent>
-                <Typography variant="h5" component="h2">
-                    What's your...
+                <Typography variant="h1" component="h1">
+                    Hi, what's your...
                 </Typography>
 
             </CardContent>
@@ -111,7 +111,7 @@ export class PersonChoose extends Component {
         if (value === 'driver') {
             this.props.next(states.CAR_DETAIL);
         } else if (value === 'rider') {
-            this.props.next(states.RIDER_START);
+            this.props.next(states.RIDER);
         } else {
             this.setState({
                 errors: ['Please choose driver or rider']
@@ -216,8 +216,6 @@ class BaseForm extends Component {
                     <Grid>
 
                         <Button secondary onClick={this._back}>Back</Button>
-
-
                         <Button primary onClick={this._validate}>Next</Button>
 
                     </Grid>
@@ -227,52 +225,28 @@ class BaseForm extends Component {
     }
 }
 
-export const DriverStart = (props) => {
+export const Driver = (props) => {
     return (
         <BaseForm
-            type='DriverStart'
+            type='Driver'
             next={props.next}
             back={props.back}
             saveForm={props.saveForm}
-            nextState={states.DRIVER_FINISH}
+            nextState={states.CONFIRM}
             lastState={states.CAR_DETAIL} />
     );
 
 }
 
-export const DriverFinish = (props) => {
+export const Rider = (props) => {
     return (
         <BaseForm
-            type='DriverFinish'
+            type='Rider'
             next={props.next}
             back={props.back}
             saveForm={props.saveForm}
             nextState={states.CONFIRM}
-            lastState={states.DRIVER_START} />
-    );
-}
-
-export const RiderStart = (props) => {
-    return (
-        <BaseForm
-            type='RiderStart'
-            next={props.next}
-            back={props.back}
-            saveForm={props.saveForm}
-            nextState={states.RIDER_FINISH}
             lastState={states.PERSON_CHOOSE} />
-    );
-}
-
-export const RiderFinish = (props) => {
-    return (
-        <BaseForm
-            type='RiderFinish'
-            next={props.next}
-            back={props.back}
-            saveForm={props.saveForm}
-            nextState={states.CONFIRM}
-            lastState={states.RIDER_START} />
     );
 }
 
@@ -297,7 +271,7 @@ export class CarInfo extends Component {
 
     _validate(e) {
         // You can add validation logic here
-        this.props.next(states.DRIVER_START);
+        this.props.next(states.DRIVER);
         console.log(this);
     }
 
