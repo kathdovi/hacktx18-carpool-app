@@ -63,6 +63,7 @@ class App extends Component {
           return (<Welcome next={this._next} />);
       case states.PERSON_CHOOSE:
           return (<PersonChoose
+                  saveForm={this._saveFields}
                   back={this._back}
                   next={this._next} />);
       case states.CAR_DETAIL:
