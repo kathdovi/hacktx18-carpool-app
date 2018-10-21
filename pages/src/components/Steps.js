@@ -40,6 +40,9 @@ const styles = {
         marginRight: 30,
         marginLeft: 30,
     },
+    wide: {
+        width: 70,
+    }
 };
 
 export const Welcome = (props) => {
@@ -209,8 +212,8 @@ class BaseForm extends Component {
                     <FormGroup widths='equal'>
                         <TextField
                             id="standard-textarea"
-                            label="With placeholder multiline"
-                            placeholder="Placeholder"
+                            label="Address"
+                            placeholder="Address"
                             multiline
                             margin="normal"
                         />
@@ -280,14 +283,15 @@ export class CarInfo extends Component {
     render() {
         return (
             <Card>
-                < Grid container style={styles.form}>
-                    <Grid item style={styles.form} xs={12}>
+                < Grid container>
+                    <Grid item xs={12}>
                         <Typography variant="h5" component="h2">
                             How many seats do you have available?
                 </Typography>
                     </Grid>
+                    <Grid item xs={12}>
                     <FormControl>
-                        <InputLabel htmlFor="seats">Seats</InputLabel>
+                        <InputLabel style={styles.wide} htmlFor="seats">Seats</InputLabel>
                         <Select
                             value={this.state.seats}
                             onChange={this.handleChange}
@@ -309,6 +313,7 @@ export class CarInfo extends Component {
                             <MenuItem value={10}>10</MenuItem>
                         </Select>
                     </FormControl>
+                    </Grid>
                     <Grid item xs={12}>
 
                         <Button secondary onClick={this._back}>Back</Button>

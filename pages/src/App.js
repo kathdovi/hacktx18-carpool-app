@@ -20,6 +20,7 @@ class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
+          currentState: states.WELCOME,
           name: null,
           phone: null,
           driver: null,
@@ -27,6 +28,7 @@ class App extends Component {
     };
     this._next = this._next.bind(this);
     this._back = this._back.bind(this);
+    this._saveFields = this._saveFields.bind(this)
     this.stateMachine = new StateMachine();
   }
 
@@ -59,6 +61,7 @@ class App extends Component {
    * state.
    */
   _currentStep() {
+    console.log(this.state.driver);
       switch (this.state.currentState) {
       case states.WELCOME:
           return (<Welcome next={this._next} />);
