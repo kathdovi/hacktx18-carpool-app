@@ -11,10 +11,10 @@ Solution: Create an app that lets users sign up as a rider or driver and automat
 Our Carpool App creates clusters where organizers are able to organize a car pool, send the link to the pool to different people, then those different people would specify if they can go, what music they prefer, and what their pickup location will be.
 
 ### Technology used
-React.js
-Go
-Node.js
-C#
+* React.js
+* Go
+* Node.js
+* C#
 
 We are using a microservices architecture where each microservice communicates with a boundary gate way that sends and receives data from the front end which is using React. We are using MongoDB for our database because most of the data is unstructured and it was easy to make database mutations as our requirements changed.
 
